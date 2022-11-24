@@ -1,0 +1,18 @@
+---
+- name: Import Grafana GPG signing key
+  ansible.builtin.apt_key:
+    url: "https://packages.grafana.com/gpg.key"
+    state: present
+    validate_certs: false
+    keyring: /usr/share/keyrings/grafana.gpg
+
+- name: Add Grafana repository [Debian/Ubuntu]
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/grafana.gpg] https://packages.grafana.com/oss/deb stable main
+    state: present
+    update_cache: true
+
+- name: Install Grafana Agent
+  ansible.builtin.package:
+    name: grafana-agent
+    state: latest

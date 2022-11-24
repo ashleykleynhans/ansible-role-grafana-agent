@@ -1,0 +1,11 @@
+galaxy_info:
+  author: Ashley Kleynhans
+  description: Ansible role to install Grafana Agent
+  license: GPLv3
+  min_ansible_version: 2.9
+  galaxy_tags:
+    - grafana
+    - agent
+    - tracing
+    - monitoring
+dependencies: []
