@@ -1,6 +1,6 @@
-# Ansible role tempo
+# Ansible role grafana-agent
 
-Ansible role to install Grafana Tempo.
+Ansible role to install Grafana Agent.
 
 ## Requirements
 
