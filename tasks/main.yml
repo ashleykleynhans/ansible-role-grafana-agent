@@ -18,9 +18,11 @@
     state: latest
 
 - name: Set Grafana Agent Defaults
-  ansible.builtin.lineinfile:
-    path: /etc/default/grafana-agent
-    regexp '^CUSTOM_ARGS=:'
-    line: 'CUSTOM_ARGS="-server.http.address={{ grafana_agent_server_http_address }} -server.grpc.address={{ grafana_agent_server_grpc_address }}"'
+  ansible.builtin.template:
+    src: etc/default/grafana-agent.j2
+    dest: /etc/default/grafana-agent
+    owner: root
+    group: root
+    mode: 0644
   notify:
     - restart grafana agent
