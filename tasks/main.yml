@@ -1,7 +1,7 @@
 ---
 - name: Import Grafana GPG signing key
   ansible.builtin.apt_key:
-    url: "https://packages.grafana.com/gpg.key"
+    url: https://packages.grafana.com/gpg.key
     state: present
     validate_certs: false
     keyring: /usr/share/keyrings/grafana.gpg
@@ -16,3 +16,11 @@
   ansible.builtin.package:
     name: grafana-agent
     state: latest
+
+- name: Set Grafana Agent Defaults
+  ansible.builtin.lineinfile:
+    path: /etc/default/grafana-agent
+    regexp '^CUSTOM_ARGS=:'
+    line: 'CUSTOM_ARGS="-server.http.address={{ grafana_agent_server_http_address }} -server.grpc.address={{ grafana_agent_server_grpc_address }}"'
+  notify:
+    - restart grafana agent
